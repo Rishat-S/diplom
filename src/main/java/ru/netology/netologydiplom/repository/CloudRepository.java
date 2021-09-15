@@ -7,11 +7,11 @@ import java.util.List;
 
 @Repository
 public class CloudRepository {
-    public UsersFile getUsersFile() {
+    public UsersFile getUsersFile(String filename) {
         return null; // FIXME:
     }
 
-    public List<UsersFile> getListUsersFiles() {
+    public List<UsersFile> getListUsersFiles(int limit) {
         return null; // FIXME:
     }
 }

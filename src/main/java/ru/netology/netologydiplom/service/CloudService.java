@@ -15,11 +15,11 @@ public class CloudService {
         this.cloudRepository = cloudRepository;
     }
 
-    public UsersFile getUsersFile() {
-        return cloudRepository.getUsersFile();
+    public UsersFile getUsersFile(String filename) {
+        return cloudRepository.getUsersFile(filename);
     }
 
-    public List<UsersFile> getListUsersFiles() {
-        return cloudRepository.getListUsersFiles();
+    public List<UsersFile> getListUsersFiles(int limit) {
+        return cloudRepository.getListUsersFiles(limit);
     }
 }
