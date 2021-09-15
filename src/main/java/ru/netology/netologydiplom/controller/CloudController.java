@@ -20,12 +20,12 @@ public class CloudController {
     }
 
     @GetMapping("/file")
-    public UsersFile getUsersFile(@RequestParam("filename") String filename) {
+    public UsersFile getUsersFile(@RequestParam(name = "filename") String filename) {
         return cloudService.getUsersFile(filename);
     }
 
     @GetMapping("/list")
-    public List<UsersFile> getListUsersFiles(@RequestParam("limit") int limit) {
+    public List<UsersFile> getListUsersFiles(@RequestParam(name = "limit") int limit) {
         return cloudService.getListUsersFiles(limit);
     }
 }
