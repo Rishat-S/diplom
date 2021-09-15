@@ -4,6 +4,7 @@ public class UsersFile {
     private long id;
     private String fileName;
     private String pathToFile;
+    private String owner;
 
 
 }
