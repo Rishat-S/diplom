@@ -1,15 +1,11 @@
-package ru.netology.netologydiplom.repository;
+package ru.netology.netologydiplom.service;
 
-import org.springframework.stereotype.Repository;
 import ru.netology.netologydiplom.entity.CustomersFile;
 
 import java.util.List;
 
-@Repository
-public interface CloudRepository {
+public interface EntityService {
     CustomersFile getFile(String filename);
 
     List<CustomersFile> getListFiles(int limit);
-
-
 }
