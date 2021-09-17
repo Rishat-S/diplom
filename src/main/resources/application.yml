@@ -9,3 +9,5 @@ spring:
   security:
     user:
       password: 31234
+
+

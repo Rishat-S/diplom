@@ -1,7 +1,7 @@
 package ru.netology.netologydiplom.service;
 
 import org.springframework.stereotype.Service;
-import ru.netology.netologydiplom.entity.UsersFile;
+import ru.netology.netologydiplom.entity.CustomersFile;
 import ru.netology.netologydiplom.repository.CloudRepository;
 
 import java.util.List;
@@ -15,11 +15,11 @@ public class CloudService {
         this.cloudRepository = cloudRepository;
     }
 
-    public UsersFile getUsersFile(String filename) {
-        return cloudRepository.getUsersFile(filename);
+    public CustomersFile getFile(String filename) {
+        return cloudRepository.getFile(filename);
     }
 
-    public List<UsersFile> getListUsersFiles(int limit) {
-        return cloudRepository.getListUsersFiles(limit);
+    public List<CustomersFile> getListFiles(int limit) {
+        return cloudRepository.getListFiles(limit);
     }
 }
