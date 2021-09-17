@@ -13,7 +13,7 @@ import javax.persistence.Entity;
 @ToString
 public class CustomersFile extends BaseEntity {
     @Column
-    private String name;
+    private String fileName;
     @Column
     private String path;
     @Column
