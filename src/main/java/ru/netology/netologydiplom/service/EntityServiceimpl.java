@@ -2,7 +2,6 @@ package ru.netology.netologydiplom.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.netology.netologydiplom.entity.Customer;
 import ru.netology.netologydiplom.entity.CustomersFile;
 import ru.netology.netologydiplom.repository.CustomerFileRepository;
 
