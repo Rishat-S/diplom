@@ -26,6 +26,6 @@ public class EntityController {
 
     @GetMapping("/list")
     public List<CustomersFile> getListFiles(@RequestParam(name = "limit") int limit) {
-        return entityService.getListFiles(limit);
+        return entityService.getListFiles();
     }
 }

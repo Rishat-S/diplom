@@ -6,6 +6,7 @@ import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 @Entity
 @Getter
@@ -16,8 +17,9 @@ public class CustomersFile extends BaseEntity {
     private String fileName;
     @Column
     private String path;
-    @Column
-    private String owner;
+    @OneToOne
+    @ToString.Exclude
+    private Customer customer;
 
 
 }

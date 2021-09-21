@@ -2,8 +2,9 @@ package ru.netology.netologydiplom.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import ru.netology.netologydiplom.entity.Customer;
 import ru.netology.netologydiplom.entity.CustomersFile;
-import ru.netology.netologydiplom.repository.EntityRepository;
+import ru.netology.netologydiplom.repository.CustomerFileRepository;
 
 import java.util.List;
 
@@ -11,19 +12,19 @@ import java.util.List;
 @Service
 public class EntityServiceimpl implements EntityService {
 
-    EntityRepository entityRepository;
+    CustomerFileRepository customerFileRepository;
 
-    public EntityServiceimpl(EntityRepository entityRepository) {
-        this.entityRepository = entityRepository;
+    public EntityServiceimpl(CustomerFileRepository customerFileRepository) {
+        this.customerFileRepository = customerFileRepository;
     }
 
     @Override
     public CustomersFile getFile(String filename) {
-        return entityRepository.getFile(filename);
+        return customerFileRepository.findByFileName(filename);
     }
 
     @Override
-    public List<CustomersFile> getListFiles(int limit) {
-        return entityRepository.getListFiles(limit);
+    public List<CustomersFile> getListFiles() {
+        return customerFileRepository.findAll();
     }
 }

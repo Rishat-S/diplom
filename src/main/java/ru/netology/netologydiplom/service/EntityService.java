@@ -1,5 +1,6 @@
 package ru.netology.netologydiplom.service;
 
+import ru.netology.netologydiplom.entity.Customer;
 import ru.netology.netologydiplom.entity.CustomersFile;
 
 import java.util.List;
@@ -7,5 +8,5 @@ import java.util.List;
 public interface EntityService {
     CustomersFile getFile(String filename);
 
-    List<CustomersFile> getListFiles(int limit);
+    List<CustomersFile> getListFiles();
 }

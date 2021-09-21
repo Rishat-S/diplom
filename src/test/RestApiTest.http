@@ -1,7 +1,19 @@
-POST http://localhost:8888/
-Content-Type: application/x-www-form-urlencoded
+POST http://localhost:8081/cloud/login
+accept: */*
+Content-Type: application/json
 
-  username: "user"
-  password: "31234"
+{
+  "login": "user",
+  "password": "31234"
+}
 
 ###
+
+GET http://localhost:8081/cloud/list?limit=1
+accept: application/json
+
+
+###
+
+GET http://localhost:8081/cloud/file?filename=fff
+accept: multipart/form-data
