@@ -4,23 +4,17 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
 @Getter
 @Setter
 @ToString
-public class Customer extends BaseEntity{
-    @Column
+public class Customer extends BaseEntity {
     private String login;
-    @Column
-    private String name;
-    @Column
-    private String surname;
-    @Column
     private String email;
-    @Column
-    private String role;
+    private String name;
+    private String surname;
+    private String password;
 
 }
