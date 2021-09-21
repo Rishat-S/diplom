@@ -1,15 +1,15 @@
 package ru.netology.netologydiplom.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Entity;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-@ToString
+@Builder
 public class Customer extends BaseEntity {
     private String login;
     private String email;
