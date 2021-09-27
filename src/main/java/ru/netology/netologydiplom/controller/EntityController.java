@@ -8,6 +8,7 @@ import ru.netology.netologydiplom.entity.CustomersFile;
 import ru.netology.netologydiplom.service.EntityService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/cloud")
@@ -20,12 +21,12 @@ public class EntityController {
     }
 
     @GetMapping("/file")
-    public CustomersFile getFile(@RequestParam(name = "filename") String filename) {
+    public Optional<CustomersFile> getFile(@RequestParam(name = "filename") String filename) {
         return entityService.getFile(filename);
     }
 
     @GetMapping("/list")
     public List<CustomersFile> getListFiles(@RequestParam(name = "limit") int limit) {
-        return entityService.getListFiles();
+        return entityService.getListFiles(); // FIXME:
     }
 }

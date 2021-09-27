@@ -6,6 +6,6 @@ import ru.netology.netologydiplom.entity.Customer;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
-    Customer findByLogin(String login);
+    Customer findCustomerByLogin(String login);
 
 }
