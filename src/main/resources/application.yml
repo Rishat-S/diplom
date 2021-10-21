@@ -1,16 +1,12 @@
 server:
-  port: 8081
+  port: 8080
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/diplom
     username: root
     password: 31234
     driver-class-name: com.mysql.cj.jdbc.Driver
-  security:
-    user:
-      name: user
-      password: 31234
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
     show-sql: true

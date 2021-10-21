@@ -1,12 +1,10 @@
 package ru.netology.netologydiplom.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -31,10 +29,6 @@ public class User implements UserDetails {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)
     private List<File> files = new ArrayList<>();
 
-    @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss")
-    @Column(updatable = false)
-    private LocalDateTime createdDate;
-
     @Transient
     private Collection<? extends GrantedAuthority> authorities;
 
@@ -53,19 +47,13 @@ public class User implements UserDetails {
         this.authorities = authorities;
     }
 
-    @PrePersist
-    protected void onCreate() {
-        this.createdDate = LocalDateTime.now();
-    }
-
     /**
      * Security
      */
 
-
     @Override
     public String getPassword() {
-    return password;
+        return password;
     }
 
     @Override
