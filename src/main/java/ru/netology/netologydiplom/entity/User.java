@@ -3,6 +3,8 @@ package ru.netology.netologydiplom.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -20,4 +22,7 @@ public class User {
     private String email;
     @Column(length = 3000)
     private String password;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)
+    private List<File> posts = new ArrayList<>();
 }
