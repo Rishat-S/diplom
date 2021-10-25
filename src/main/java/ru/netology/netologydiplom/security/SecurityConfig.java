@@ -37,7 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(SecurityConstants.SIGN_UP_URLS).permitAll()
+                .antMatchers(SecurityConstants.CLOUD_SIGNUP).permitAll()
+                .antMatchers(SecurityConstants.CLOUD_LOGIN).permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
