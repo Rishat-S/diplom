@@ -1,6 +1,7 @@
 package ru.netology.netologydiplom.payload.request;
 
 import lombok.Data;
+import ru.netology.netologydiplom.annotation.PasswordMatches;
 import ru.netology.netologydiplom.annotation.ValidEmail;
 
 import javax.validation.constraints.Email;
@@ -9,6 +10,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Data
+@PasswordMatches
 public class SignupRequest {
     @Email(message = "It should have email format")
     @NotBlank(message = "User email is required")
