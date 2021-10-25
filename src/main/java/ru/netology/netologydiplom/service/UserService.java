@@ -3,13 +3,17 @@ package ru.netology.netologydiplom.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import ru.netology.netologydiplom.dto.UserDTO;
 import ru.netology.netologydiplom.entity.ERole;
 import ru.netology.netologydiplom.entity.User;
 import ru.netology.netologydiplom.exceptions.UserExistException;
 import ru.netology.netologydiplom.payload.request.SignupRequest;
 import ru.netology.netologydiplom.repository.UserRepository;
+
+import java.security.Principal;
 
 @Service
 public class UserService {
@@ -41,6 +45,24 @@ public class UserService {
             throw new UserExistException("The user " + user.getUsername() + " already exist. Please check credentials");
         }
 
+    }
+
+    public User updateUser(UserDTO userDTO, Principal principal) {
+        User user = getUserByPrincipal(principal);
+        user.setFirstName(userDTO.getFirstname());
+        user.setLastName(userDTO.getLastname());
+
+        return userRepository.save(user);
+    }
+
+    public User getCurrentUser(Principal principal) {
+        return getUserByPrincipal(principal);
+    }
+
+    private User getUserByPrincipal(Principal principal) {
+        String username = principal.getName();
+        return userRepository.findUserByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found with username " + username));
     }
 
 }
