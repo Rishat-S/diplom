@@ -1,4 +1,4 @@
-package ru.netology.netologydiplom.validation;
+package ru.netology.netologydiplom.validations;
 
 import ru.netology.netologydiplom.annotation.PasswordMatches;
 import ru.netology.netologydiplom.payload.request.SignupRequest;

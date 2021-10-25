@@ -1,6 +1,6 @@
 package ru.netology.netologydiplom.annotation;
 
-import ru.netology.netologydiplom.validation.EmailValidator;
+import ru.netology.netologydiplom.validations.EmailValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

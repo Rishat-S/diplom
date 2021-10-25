@@ -1,6 +1,6 @@
 package ru.netology.netologydiplom.annotation;
 
-import ru.netology.netologydiplom.validation.PasswordMatchesValidator;
+import ru.netology.netologydiplom.validations.PasswordMatchesValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
