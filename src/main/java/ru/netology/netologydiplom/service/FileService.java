@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 import ru.netology.netologydiplom.dto.FileDTO;
 import ru.netology.netologydiplom.entity.File;
 import ru.netology.netologydiplom.entity.User;
+import ru.netology.netologydiplom.exceptions.FileNotFoundException;
 import ru.netology.netologydiplom.repository.FileRepository;
 import ru.netology.netologydiplom.repository.UserRepository;
 
-import java.io.FileNotFoundException;
 import java.security.Principal;
 import java.util.List;
 
@@ -46,6 +46,11 @@ public class FileService {
         User user = getUserByPrincipal(principal);
         return fileRepository.findFileByIdAndUser(fileId, user)
                 .orElseThrow(() -> new FileNotFoundException("File cannot be found for username: " + user.getUsername()));
+    }
+
+    public void deleteFile(Long fileId, Principal principal) {
+        File file = getFileById(fileId, principal);
+        fileRepository.delete(file);
     }
 
     private User getUserByPrincipal(Principal principal) {
