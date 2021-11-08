@@ -1,4 +1,4 @@
-package ru.netology.netologydiplom.security;
+package ru.netology.netologydiplom.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +13,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import ru.netology.netologydiplom.security.JwtAuthenticationEntryPoint;
+import ru.netology.netologydiplom.security.JwtAuthenticationFilter;
+import ru.netology.netologydiplom.security.SecurityConstants;
 import ru.netology.netologydiplom.service.CustomUserDetailsService;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
@@ -30,14 +35,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable()
+        http.cors(withDefaults()).csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(SecurityConstants.CLOUD_SIGNUP).permitAll()
                 .antMatchers(SecurityConstants.CLOUD_LOGIN).permitAll()
                 .anyRequest().authenticated();
 
@@ -64,4 +68,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
         return new JwtAuthenticationFilter();
     }
+
 }
