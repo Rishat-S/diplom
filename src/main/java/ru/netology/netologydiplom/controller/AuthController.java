@@ -43,14 +43,14 @@ public class AuthController {
             return errors;
         }
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                loginRequest.getUsername(),
+                loginRequest.getLogin(),
                 loginRequest.getPassword()
         ));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = SecurityConstants.TOKEN_PREFIX + jwtTokenProvider.generateToken(authentication);
 
-        return ResponseEntity.ok(new JwtTokenSuccessResponse(true, jwt));
+        return ResponseEntity.ok(new JwtTokenSuccessResponse(jwt));
 
     }
 

@@ -7,7 +7,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class JwtTokenSuccessResponse {
-    private boolean success;
     @JsonProperty("auth-token")
     private String token;
 }
