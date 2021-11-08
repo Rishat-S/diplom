@@ -19,8 +19,7 @@ import ru.netology.netologydiplom.service.CustomUserDetailsService;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
         securedEnabled = true,
-        jsr250Enabled = true,
-        proxyTargetClass = true
+        prePostEnabled = true
 )
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -31,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .and()
                 .sessionManagement()
