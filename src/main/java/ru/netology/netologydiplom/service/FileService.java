@@ -31,7 +31,7 @@ public class FileService {
         this.fileFacade = fileFacade;
     }
 
-    public File save(String filename, MultipartFile multipartFile, Principal principal) throws IOException {
+    public void save(String filename, MultipartFile multipartFile, Principal principal) throws IOException {
         User user = getUserByPrincipal(principal);
         File file = new File();
         file.setUser(user);
@@ -40,7 +40,7 @@ public class FileService {
         file.setSize(multipartFile.getSize());
 
         LOG.info("Saving file for user: {}", user.getEmail());
-        return fileRepository.save(file);
+        fileRepository.save(file);
     }
 
     public List<FileDTO> getAllFilesByUser(Long limit, Principal principal) {
@@ -69,4 +69,9 @@ public class FileService {
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found with username " + username));
     }
 
+    public void updateFile(String fileName, String newFileName, Principal principal) {
+        File file = getFileByName(fileName, principal);
+        file.setName(newFileName);
+        fileRepository.save(file);
+    }
 }

@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.netology.netologydiplom.dto.FileDTO;
-import ru.netology.netologydiplom.entity.File;
 import ru.netology.netologydiplom.facade.FileFacade;
 import ru.netology.netologydiplom.payload.response.MessageResponse;
 import ru.netology.netologydiplom.service.FileService;
@@ -46,9 +45,10 @@ public class FileController {
     }
 
     @PutMapping("/file")
-    public ResponseEntity<Object> updateFile() {
-        // TODO:
-        return ResponseEntity.ok(new Object()); //FIXME
+    public ResponseEntity<MessageResponse> updateFile(@RequestParam("filename") String fileName,
+                                                      @RequestBody FileDTO fileDTO, Principal principal) {
+        fileService.updateFile(fileName, fileDTO.getName(), principal);
+        return ResponseEntity.ok(new MessageResponse("File updated successfully"));
     }
 
     @GetMapping("/file")
