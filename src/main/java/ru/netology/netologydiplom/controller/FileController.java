@@ -50,10 +50,8 @@ public class FileController {
 
     @GetMapping("/file")
     public ResponseEntity<byte[]> getFile(@RequestParam("filename") String fileName, Principal principal) {
-        //TODO:
         File file = fileService.getFileByName(fileName, principal);
-
-        return ResponseEntity.ok(new Object()); //FIXME
+        return ResponseEntity.ok(file.getFileBytes());
     }
 
 }
