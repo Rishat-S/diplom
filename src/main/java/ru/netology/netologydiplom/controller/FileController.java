@@ -36,8 +36,8 @@ public class FileController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<FileDTO>> listFiles(@RequestParam("limit") String limit, Principal principal) {
-        List<FileDTO> fileList = fileService.getAllFilesByUser(Long.parseLong(limit), principal);
+    public ResponseEntity<List<FileDTO>> listFiles(@RequestParam(name = "limit") Long limit, Principal principal) {
+        List<FileDTO> fileList = fileService.getAllFilesByUser(limit, principal);
         return ResponseEntity.ok(fileList);
     }
 
