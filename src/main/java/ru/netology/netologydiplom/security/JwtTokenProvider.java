@@ -3,9 +3,13 @@ package ru.netology.netologydiplom.security;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
+import ru.netology.netologydiplom.entity.TokenBlacklist;
 import ru.netology.netologydiplom.entity.User;
+import ru.netology.netologydiplom.exceptions.JwtAuthenticationException;
+import ru.netology.netologydiplom.repository.TokenBlacklistRepository;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -14,6 +18,9 @@ import java.util.Map;
 @Component
 public class JwtTokenProvider {
     public static final Logger LOG = LoggerFactory.getLogger(JwtTokenProvider.class);
+
+    @Autowired
+    private TokenBlacklistRepository tokenBlacklistRepository;
 
     public String generateToken(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
@@ -38,6 +45,7 @@ public class JwtTokenProvider {
     }
 
     public boolean validateToken(String token) {
+        if (tokenBlacklistRepository.existsById(token)) throw new JwtAuthenticationException("Forbidden token.");
         try {
             Jwts.parser()
                     .setSigningKey(SecurityConstants.SECRET)
@@ -57,6 +65,12 @@ public class JwtTokenProvider {
                 .getBody();
         String id = (String) claims.get("id");
         return Long.parseLong(id);
+    }
+
+    public void addTokenToBlacklist(String token) {
+        var forbiddenToken = new TokenBlacklist();
+        forbiddenToken.setToken(token);
+        tokenBlacklistRepository.save(forbiddenToken);
     }
 
 }

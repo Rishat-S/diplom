@@ -13,6 +13,7 @@ import ru.netology.netologydiplom.payload.request.LoginRequest;
 import ru.netology.netologydiplom.payload.request.SignupRequest;
 import ru.netology.netologydiplom.payload.response.JwtTokenSuccessResponse;
 import ru.netology.netologydiplom.payload.response.MessageResponse;
+import ru.netology.netologydiplom.repository.TokenBlacklistRepository;
 import ru.netology.netologydiplom.security.JwtTokenProvider;
 import ru.netology.netologydiplom.security.SecurityConstants;
 import ru.netology.netologydiplom.service.UserService;
@@ -32,7 +33,7 @@ public class AuthController {
     private final UserService userService;
 
     public AuthController(JwtTokenProvider jwtTokenProvider, AuthenticationManager authenticationManager,
-                          ResponseErrorValidation responseErrorValidation, UserService userService) {
+                          ResponseErrorValidation responseErrorValidation, UserService userService, TokenBlacklistRepository tokenBlacklistRepository) {
         this.jwtTokenProvider = jwtTokenProvider;
         this.authenticationManager = authenticationManager;
         this.responseErrorValidation = responseErrorValidation;
@@ -55,6 +56,13 @@ public class AuthController {
         String jwt = SecurityConstants.TOKEN_PREFIX + jwtTokenProvider.generateToken(authentication);
 
         return ResponseEntity.ok(new JwtTokenSuccessResponse(jwt));
+
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<Object> logoutUser(@RequestHeader("auth-token") String token) {
+        jwtTokenProvider.addTokenToBlacklist(token);
+        return ResponseEntity.ok(new MessageResponse("User logout successfully"));
 
     }
 
