@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.netology.netologydiplom.dto.FileDTO;
+import ru.netology.netologydiplom.entity.File;
 import ru.netology.netologydiplom.payload.response.MessageResponse;
 import ru.netology.netologydiplom.service.FileService;
 
@@ -48,8 +49,10 @@ public class FileController {
     }
 
     @GetMapping("/file")
-    public ResponseEntity<Object> getFile() {
+    public ResponseEntity<byte[]> getFile(@RequestParam("filename") String fileName, Principal principal) {
         //TODO:
+        File file = fileService.getFileByName(fileName, principal);
+
         return ResponseEntity.ok(new Object()); //FIXME
     }
 
