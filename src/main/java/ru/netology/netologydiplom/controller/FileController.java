@@ -1,14 +1,11 @@
 package ru.netology.netologydiplom.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.netology.netologydiplom.dto.FileDTO;
-import ru.netology.netologydiplom.facade.FileFacade;
 import ru.netology.netologydiplom.payload.response.MessageResponse;
 import ru.netology.netologydiplom.service.FileService;
-import ru.netology.netologydiplom.validations.ResponseErrorValidation;
 
 import java.io.IOException;
 import java.security.Principal;
@@ -18,12 +15,11 @@ import java.util.List;
 @RequestMapping("/cloud")
 public class FileController {
 
-    @Autowired
-    private FileService fileService;
-    @Autowired
-    private FileFacade fileFacade;
-    @Autowired
-    private ResponseErrorValidation responseErrorValidation;
+    private final FileService fileService;
+
+    public FileController(FileService fileService) {
+        this.fileService = fileService;
+    }
 
     @PostMapping("/file")
     public ResponseEntity<MessageResponse> uploadFile(@RequestParam("filename") String fileName, MultipartFile file,

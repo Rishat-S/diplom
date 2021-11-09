@@ -1,6 +1,5 @@
 package ru.netology.netologydiplom.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,14 +26,18 @@ import javax.validation.Valid;
 @PreAuthorize("permitAll()")
 public class AuthController {
 
-    @Autowired
-    private JwtTokenProvider jwtTokenProvider;
-    @Autowired
-    private AuthenticationManager authenticationManager;
-    @Autowired
-    private ResponseErrorValidation responseErrorValidation;
-    @Autowired
-    private UserService userService;
+    private final JwtTokenProvider jwtTokenProvider;
+    private final AuthenticationManager authenticationManager;
+    private final ResponseErrorValidation responseErrorValidation;
+    private final UserService userService;
+
+    public AuthController(JwtTokenProvider jwtTokenProvider, AuthenticationManager authenticationManager,
+                          ResponseErrorValidation responseErrorValidation, UserService userService) {
+        this.jwtTokenProvider = jwtTokenProvider;
+        this.authenticationManager = authenticationManager;
+        this.responseErrorValidation = responseErrorValidation;
+        this.userService = userService;
+    }
 
     @PostMapping("/login")
     public ResponseEntity<Object> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, BindingResult bindingResult) {
