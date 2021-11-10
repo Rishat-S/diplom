@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  web:
+    build: .
+    ports:
+      - "8081:8081"
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 31234
+      MYSQL_DATABASE: diplom
+    volumes:
+      - ./mysql_data:/var/lib/mysql mysql
+    ports:
+      - "3306:3306"
+
