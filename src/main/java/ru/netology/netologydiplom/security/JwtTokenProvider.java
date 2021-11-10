@@ -67,9 +67,9 @@ public class JwtTokenProvider {
         return Long.parseLong(id);
     }
 
-    public void addTokenToBlacklist(String token) {
+    public void addTokenToBlacklist(String bearToken) {
         var forbiddenToken = new TokenBlacklist();
-        forbiddenToken.setToken(token);
+        forbiddenToken.setToken(bearToken.split(" ")[1]);
         tokenBlacklistRepository.save(forbiddenToken);
     }
 
