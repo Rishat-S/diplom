@@ -60,8 +60,8 @@ public class AuthController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<Object> logoutUser(@RequestHeader("auth-token") String token) {
-        jwtTokenProvider.addTokenToBlacklist(token);
+    public ResponseEntity<Object> logoutUser(@RequestHeader("auth-token") String bearerToken) {
+        jwtTokenProvider.addTokenToBlacklist(bearerToken);
         return ResponseEntity.ok(new MessageResponse("User logout successfully"));
 
     }
