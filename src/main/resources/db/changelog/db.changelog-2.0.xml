@@ -3,27 +3,13 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <changeSet id="2.0.0" author="rishat.suleymanov">
-        <insert catalogName="diplom"
-                dbms="mysql"
-                schemaName="diplom"
-                tableName="user">
-            <column name="email" value="user@mail.com"/>
-            <column name="first_name" value="User"/>
-            <column name="last_name" value="Userov"/>
-            <column name="password" value="$2a$10$qwMGxShOHYqU0Ru6TkqWEOJGSY7a5MfnZCSIOjZZDTFSOJT8zJSYu"/>
-            <column name="username" value="user"/>
-        </insert>
+    <changeSet id="2.0.0" author="r.suleymanov">
+        <addForeignKeyConstraint baseTableName="user_role" baseColumnNames="user_id"
+                                 constraintName="FK859n2jvi8ivhui0rl0esws6o"
+                                 referencedTableName="user" referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="file" baseColumnNames="user_id"
+                                 constraintName="FKinph5hu8ryc97hbs75ym9sm7t"
+                                 referencedTableName="user" referencedColumnNames="id"/>
     </changeSet>
-
-<changeSet id="2.0.1" author="rishat.suleymanov">
-    <insert catalogName="diplom"
-            dbms="mysql"
-            schemaName="diplom"
-            tableName="user_role">
-        <column name="user_id" value="1"/>
-        <column name="roles" value="0"/>
-    </insert>
-</changeSet>
 
 </databaseChangeLog>
