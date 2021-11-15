@@ -3,12 +3,63 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-     <changeSet id="1.0.1" author="rishat.suleymanov">
+    <changeSet id="1.0.0" author="rishat.suleymanov">
+        <createTable tableName="User">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="email" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="firstName" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lastName" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(255)"/>
+            <column name="username" type="varchar(255)">
+                <constraints unique="true"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="File">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="createdDate" type="datetime(6)"/>
+            <column name="fileBytes" type="longblob"/>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="size" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint"/>
+        </createTable>
+
+        <createTable tableName="user_role">
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="roles" type="integer"/>
+
+        </createTable>
+    </changeSet>
+    <changeSet id="1.0.1" author="rishat.suleymanov">
         <createTable tableName="token_blacklist">
             <column name="token" type="VARCHAR(255)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
         </createTable>
     </changeSet>
+<changeSet id="1.0.2" author="rishat.suleymanov">
+    <addForeignKeyConstraint baseTableName="user_role" baseColumnNames="user_id"
+                             constraintName="FK859n2jvi8ivhui0rl0esws6o"
+                             referencedTableName="user" referencedColumnNames="id"/>
+    <addForeignKeyConstraint baseTableName="file" baseColumnNames="user_id"
+                             constraintName="FKinph5hu8ryc97hbs75ym9sm7t"
+                             referencedTableName="user" referencedColumnNames="id"/>
+</changeSet>
 
 </databaseChangeLog>
