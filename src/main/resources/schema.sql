@@ -9,12 +9,6 @@ create table if not exists file
     primary key (id)
 ) engine = InnoDB;
 
-create table if not exists token_blacklist
-(
-    token varchar(255) not null,
-    primary key (token)
-) engine = InnoDB;
-
 create table if not exists user
 (
     id         bigint       not null auto_increment,
