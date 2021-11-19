@@ -1,6 +1,5 @@
 package ru.netology.netologydiplom.payload.response;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 

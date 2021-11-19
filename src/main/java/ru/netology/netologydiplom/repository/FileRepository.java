@@ -13,7 +13,5 @@ public interface FileRepository extends JpaRepository<File, Long> {
 
     List<File> findAllByUserOrderByCreatedDateDesc(User user);
 
-    Optional<File> findFileByIdAndUser(Long id, User user);
-
     Optional<File> findFileByNameAndUser(String name, User user);
 }

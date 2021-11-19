@@ -1,7 +1,6 @@
 package ru.netology.netologydiplom.security;
 
 public class SecurityConstants {
-    public static final String CLOUD_SIGNUP = "/cloud/signup/**";
     public static final String CLOUD_LOGIN = "/cloud/login/**";
     public static final String SECRET = "SecretKeyGenJWT";
     public static final String TOKEN_PREFIX = "Bearer ";
