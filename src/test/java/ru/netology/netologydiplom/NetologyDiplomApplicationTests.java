@@ -2,6 +2,7 @@ package ru.netology.netologydiplom;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,15 +11,19 @@ import ru.netology.netologydiplom.entity.User;
 import ru.netology.netologydiplom.exceptions.FileNotFoundException;
 import ru.netology.netologydiplom.repository.FileRepository;
 import ru.netology.netologydiplom.repository.UserRepository;
+import ru.netology.netologydiplom.service.FileService;
+
+import java.security.Principal;
 
 @SpringBootTest
 class NetologyDiplomApplicationTests {
 
     @Autowired
-    private FileRepository fileRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private FileService fileService;
+
 
     @Test
     @Transactional
@@ -27,7 +32,7 @@ class NetologyDiplomApplicationTests {
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
 
         this.userExistTest(user);
-        this.fileExistTest(user);
+        this.fileExistTest();
     }
 
 
@@ -37,10 +42,12 @@ class NetologyDiplomApplicationTests {
 
     }
 
-    public void fileExistTest(User user) {
+    public void fileExistTest() {
 
-        var file = fileRepository.findFileByNameAndUser("name", user)
-                .orElseThrow(() -> new FileNotFoundException("File cannot be found"));
+        Principal principal = Mockito.mock(Principal.class);
+        Mockito.when(principal.getName()).thenReturn("user");
+
+        var file = fileService.getFileByName("name", principal);
 
         Assertions.assertNotNull(file);
 
