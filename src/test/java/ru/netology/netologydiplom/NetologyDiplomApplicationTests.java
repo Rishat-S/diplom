@@ -1,9 +1,7 @@
 package ru.netology.netologydiplom;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,9 +10,6 @@ import ru.netology.netologydiplom.entity.User;
 import ru.netology.netologydiplom.exceptions.FileNotFoundException;
 import ru.netology.netologydiplom.repository.FileRepository;
 import ru.netology.netologydiplom.repository.UserRepository;
-import ru.netology.netologydiplom.service.FileService;
-
-import java.security.Principal;
 
 @SpringBootTest
 class NetologyDiplomApplicationTests {
@@ -27,24 +22,22 @@ class NetologyDiplomApplicationTests {
 
     @Test
     @Transactional
-    public void test() {
-        Principal mockPrincipal = Mockito.mock(Principal.class);
-        Mockito.when(mockPrincipal.getName()).thenReturn("user");
-
-        User user = userRepository.findUserByUsername(mockPrincipal.getName())
+    public void tests() {
+        User user = userRepository.findUserByUsername("user")
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
+
+        this.userExistTest(user);
+        this.fileExistTest(user);
+    }
+
+
+    public void userExistTest(User user) {
 
         Assertions.assertNotNull(user);
 
     }
-    @Test
-    @Transactional
-    public void test2() {
-        Principal mockPrincipal = Mockito.mock(Principal.class);
-        Mockito.when(mockPrincipal.getName()).thenReturn("user");
 
-        User user = userRepository.findUserByUsername(mockPrincipal.getName())
-                .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
+    public void fileExistTest(User user) {
 
         var file = fileRepository.findFileByNameAndUser("name", user)
                 .orElseThrow(() -> new FileNotFoundException("File cannot be found"));
@@ -52,6 +45,5 @@ class NetologyDiplomApplicationTests {
         Assertions.assertNotNull(file);
 
     }
-
 
 }
