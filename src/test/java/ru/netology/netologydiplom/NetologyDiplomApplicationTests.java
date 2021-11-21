@@ -26,7 +26,7 @@ class NetologyDiplomApplicationTests {
     @Test
     @Transactional
     public void tests() {
-        User user = userRepository.findUserByUsername("user")
+        var user = userRepository.findUserByUsername("user")
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
 
         this.userExistTest(user);
