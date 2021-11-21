@@ -8,8 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 import ru.netology.netologydiplom.entity.User;
-import ru.netology.netologydiplom.exceptions.FileNotFoundException;
-import ru.netology.netologydiplom.repository.FileRepository;
 import ru.netology.netologydiplom.repository.UserRepository;
 import ru.netology.netologydiplom.service.FileService;
 
@@ -32,17 +30,24 @@ class NetologyDiplomApplicationTests {
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
 
         this.userExistTest(user);
+        this.addFileToCloud();
         this.fileExistTest();
+        this.updateFileInTheCloud();
+        this.deleteFileFromCloud();
     }
 
 
-    public void userExistTest(User user) {
+    private void userExistTest(User user) {
 
         Assertions.assertNotNull(user);
 
     }
 
-    public void fileExistTest() {
+    private void addFileToCloud() {
+
+    }
+
+    private void fileExistTest() {
 
         Principal principal = Mockito.mock(Principal.class);
         Mockito.when(principal.getName()).thenReturn("user");
@@ -50,6 +55,14 @@ class NetologyDiplomApplicationTests {
         var file = fileService.getFileByName("name", principal);
 
         Assertions.assertNotNull(file);
+
+    }
+
+    private void updateFileInTheCloud() {
+
+    }
+
+    private void deleteFileFromCloud() {
 
     }
 
