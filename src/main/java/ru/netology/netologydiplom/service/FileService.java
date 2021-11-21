@@ -58,6 +58,12 @@ public class FileService {
                 .orElseThrow(() -> new FileNotFoundException("File cannot be found for username: " + user.getUsername()));
     }
 
+    public void updateFile(String fileName, String newFileName, Principal principal) {
+        File file = getFileByName(fileName, principal);
+        file.setName(newFileName);
+        fileRepository.save(file);
+    }
+
     public void deleteFile(String fileName, Principal principal) {
         File file = getFileByName(fileName, principal);
         fileRepository.delete(file);
@@ -67,11 +73,5 @@ public class FileService {
         String username = principal.getName();
         return userRepository.findUserByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found with username " + username));
-    }
-
-    public void updateFile(String fileName, String newFileName, Principal principal) {
-        File file = getFileByName(fileName, principal);
-        file.setName(newFileName);
-        fileRepository.save(file);
     }
 }
