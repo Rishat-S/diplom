@@ -20,9 +20,6 @@ import java.security.Principal;
 class NetologyDiplomApplicationTests {
 
     @Autowired
-    private FileService fileService;
-
-    @Autowired
     private FileRepository fileRepository;
 
     @Autowired
@@ -31,6 +28,18 @@ class NetologyDiplomApplicationTests {
     @Test
     @Transactional
     public void test() {
+        Principal mockPrincipal = Mockito.mock(Principal.class);
+        Mockito.when(mockPrincipal.getName()).thenReturn("user");
+
+        User user = userRepository.findUserByUsername(mockPrincipal.getName())
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
+
+        Assertions.assertNotNull(user);
+
+    }
+    @Test
+    @Transactional
+    public void test2() {
         Principal mockPrincipal = Mockito.mock(Principal.class);
         Mockito.when(mockPrincipal.getName()).thenReturn("user");
 
