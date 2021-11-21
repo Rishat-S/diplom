@@ -14,3 +14,6 @@ spring:
   sql:
     init:
       mode: always
+
+  liquibase:
+    change-log: db/changelog/db.changelog-master-test.yaml

@@ -4,9 +4,9 @@
                         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
     <changeSet id="3.0.0" author="r.suleymanov">
-        <insert catalogName="diplom"
+        <insert catalogName="diplom_test"
                 dbms="mysql"
-                schemaName="diplom"
+                schemaName="diplom_test"
                 tableName="user">
             <column name="email" value="user@mail.com"/>
             <column name="first_name" value="User"/>
@@ -17,9 +17,9 @@
     </changeSet>
 
     <changeSet id="3.0.1" author="r.suleymanov">
-        <insert catalogName="diplom"
+        <insert catalogName="diplom_test"
                 dbms="mysql"
-                schemaName="diplom"
+                schemaName="diplom_test"
                 tableName="user_role">
             <column name="user_id" value="1"/>
             <column name="roles" value="0"/>
