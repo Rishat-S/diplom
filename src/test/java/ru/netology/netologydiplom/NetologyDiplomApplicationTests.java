@@ -9,11 +9,13 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import ru.netology.netologydiplom.entity.User;
 import ru.netology.netologydiplom.repository.UserRepository;
 import ru.netology.netologydiplom.service.FileService;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.security.Principal;
 
 @SpringBootTest
@@ -29,10 +31,8 @@ class NetologyDiplomApplicationTests {
     @Test
     @Transactional
     public void tests() throws IOException {
-        var user = userRepository.findUserByUsername("user")
-                .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
 
-        this.userExistTest(user);
+        this.userExistTest();
         this.addFileToCloud();
         this.getFileByName();
         this.getAllFilesByUser();
@@ -41,7 +41,9 @@ class NetologyDiplomApplicationTests {
     }
 
 
-    private void userExistTest(User user) {
+    private void userExistTest() {
+        var user = userRepository.findUserByUsername("user")
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
 
         Assertions.assertNotNull(user);
 
@@ -64,7 +66,8 @@ class NetologyDiplomApplicationTests {
         Principal principal = Mockito.mock(Principal.class);
         Mockito.when(principal.getName()).thenReturn("user");
 
-        var files = fileService.getAllFilesByUser(2L, principal);
+        var files = fileService.getAllFilesByUser(3L, principal);
+
     }
 
     private void getFileByName() {
