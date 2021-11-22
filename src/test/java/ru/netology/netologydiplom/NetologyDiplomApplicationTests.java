@@ -68,6 +68,9 @@ class NetologyDiplomApplicationTests {
 
         var files = fileService.getAllFilesByUser(3L, principal);
 
+        Assertions.assertEquals(files.size(), 1);
+        Assertions.assertEquals(files.get(0).getFilename(), "filename" );
+
     }
 
     private void getFileByName() {
@@ -86,6 +89,12 @@ class NetologyDiplomApplicationTests {
         Mockito.when(principal.getName()).thenReturn("user");
 
         fileService.updateFile("filename", "new_filename", principal);
+
+        var files = fileService.getAllFilesByUser(3L, principal);
+
+        Assertions.assertEquals(files.size(), 1);
+        Assertions.assertEquals(files.get(0).getFilename(), "new_filename" );
+
     }
 
     private void deleteFileFromCloud() {
@@ -93,6 +102,10 @@ class NetologyDiplomApplicationTests {
         Mockito.when(principal.getName()).thenReturn("user");
 
         fileService.deleteFile("new_filename", principal);
+
+        var files = fileService.getAllFilesByUser(3L, principal);
+
+        Assertions.assertEquals(files.size(), 0);
 
     }
 
