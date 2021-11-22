@@ -13,7 +13,6 @@ import ru.netology.netologydiplom.payload.response.JwtTokenSuccessResponse;
 import ru.netology.netologydiplom.payload.response.MessageResponse;
 import ru.netology.netologydiplom.repository.TokenBlacklistRepository;
 import ru.netology.netologydiplom.security.JwtTokenProvider;
-import ru.netology.netologydiplom.security.SecurityConstants;
 
 import javax.validation.Valid;
 
@@ -40,7 +39,7 @@ public class AuthController {
         ));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = SecurityConstants.TOKEN_PREFIX + jwtTokenProvider.generateToken(authentication);
+        String jwt = jwtTokenProvider.generateToken(authentication);
 
         return ResponseEntity.ok(new JwtTokenSuccessResponse(jwt));
     }

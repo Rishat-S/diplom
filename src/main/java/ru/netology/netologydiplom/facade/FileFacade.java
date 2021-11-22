@@ -9,7 +9,7 @@ public class FileFacade {
 
     public FileDTO fileToFileDTO(File file) {
         FileDTO fileDTO = new FileDTO();
-        fileDTO.setName(file.getName());
+        fileDTO.setFilename(file.getName());
         fileDTO.setSize(file.getSize());
         return fileDTO;
     }

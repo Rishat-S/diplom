@@ -44,7 +44,7 @@ public class FileController {
     @PutMapping("/file")
     public ResponseEntity<MessageResponse> updateFile(@RequestParam("filename") String fileName,
                                                       @RequestBody FileDTO fileDTO, Principal principal) {
-        fileService.updateFile(fileName, fileDTO.getName(), principal);
+        fileService.updateFile(fileName, fileDTO.getFilename(), principal);
         return ResponseEntity.ok(new MessageResponse("File updated successfully"));
     }
 
