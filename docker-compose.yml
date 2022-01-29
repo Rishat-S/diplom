@@ -1,7 +1,31 @@
 version: "3.8"
 
+volumes:
+  dbdata:
+
 services:
   web:
     build: .
-    ports:
-      - "8081:8081"
+    container_name: web
+    restart: on-failure
+    depends_on:
+      db:
+        condition: service_healthy
+    network_mode: host
+
+  db:
+    image: mysql
+    restart: on-failure
+    container_name: db
+    volumes:
+      - dbdata:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 31234
+      MYSQL_DATABASE: diplom
+    network_mode: host
+    healthcheck:
+      test: "/usr/bin/mysql --user=root --password=31234 --execute \"SHOW DATABASES;\""
+      interval: 2s
+      timeout: 30s
+      retries: 15
+
